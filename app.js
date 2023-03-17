@@ -16,9 +16,7 @@ const percentageButton = document.querySelector(".percentage").addEventListener(
 
 const equalButton = document.querySelector(".equal").addEventListener('click', equalButtonPressed);
 
-const deleteButton = document.querySelector(".delete").addEventListener('click', () => {
-    currentOperand.innerText = currentOperand.innerText.slice(0,-1);
-});
+const deleteButton = document.querySelector(".delete").addEventListener('click', backspace);
 
 const allClearButton = document.querySelector(".all-clear").addEventListener('click', allClear);
 
@@ -92,6 +90,10 @@ function operationButtonPressed (keyPressed) {
         previousOperand.innerText = currentOperand.innerText + " " + operation;
         currentOperand.innerText = "";
     }
+}
+
+function backspace () {
+    currentOperand.innerText = currentOperand.innerText.slice(0,-1);
 }
 
 //keyboard
@@ -193,7 +195,7 @@ document.addEventListener('keydown', (event) => {
             operationButtonPressed("+");
             break;
         case "Backspace":
-            currentOperand.innerText = currentOperand.innerText.slice(0,-1);
+            backspace();
             break;
         case "Delete":
             allClear();
