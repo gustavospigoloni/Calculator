@@ -174,7 +174,10 @@ document.addEventListener('keydown', (event) => {
         case "NumpadDivide":
             operationButtonPressed("/");
             break;
-        case "IntlRo":
+        case "IntlRo": //brazilian portuguese keyboard...
+            operationButtonPressed("/");
+            break;
+        case "Slash":
             operationButtonPressed("/");
             break;
         case "NumpadMultiply":
