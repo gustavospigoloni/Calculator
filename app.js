@@ -208,6 +208,7 @@ document.addEventListener('keydown', (event) => {
             break;
         case "Delete":
             allClear();
+            break;
         case "NumpadEnter":
             event.preventDefault();
             equalButtonPressed();
