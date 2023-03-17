@@ -6,6 +6,7 @@
 - [Gustavo Henrique Spigoloni Vilaca](https://github.com/gustavospigoloni)
 - [Lucas Coutinho de Assis](https://github.com/lcassis10)
 - [Md Shahinur Rahman](https://github.com/shahinator)
+- [Elaine Bergström](https://github.com/theCorgiCoder)
 
 
 ## Project
