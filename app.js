@@ -12,15 +12,15 @@ const operationButtons = document.querySelectorAll(".operation").forEach((button
     button.addEventListener('click', () => operationButtonPressed(button.innerText))
 });
 
-const equalButton = document.querySelector(".equal").addEventListener('click', equalButtonPressed());
+const percentageButton = document.querySelector(".percentage").addEventListener('click', percentage);
+
+const equalButton = document.querySelector(".equal").addEventListener('click', equalButtonPressed);
 
 const deleteButton = document.querySelector(".delete").addEventListener('click', () => {
     currentOperand.innerText = currentOperand.innerText.slice(0,-1);
 });
 
-const allClearButton = document.querySelector(".all-clear").addEventListener('click', () => {
-    allClear();
-});
+const allClearButton = document.querySelector(".all-clear").addEventListener('click', allClear);
 
 const positiveNegativeButton = document.querySelector(".pos-neg").addEventListener('click', () => {
     if (currentOperand.innerText.includes("-")) currentOperand.innerText = currentOperand.innerText.slice(1);
@@ -44,18 +44,23 @@ function operate (operation) {
     }
 }
 
-function appendNumber (number) {
-    if (number === "." && currentOperand.innerText.includes(".")) return;
-    if (number === "0" && currentOperand.innerText === "0") return;
-    if (currentOperand.innerText === "0" && number !== ".") return currentOperand.innerText = number;
-    if (currentOperand.innerText === "" && number === ".") return currentOperand.innerText = "0.";
-    currentOperand.innerText = currentOperand.innerText + number;
+function percentage () {
+    if (currentOperand.innerText === "") return;
+    currentOperand.innerText = parseFloat(currentOperand.innerText) / 100;
 }
 
 function allClear () {
     operation = "";
     previousOperand.innerText = "";
     currentOperand.innerText = "";
+}
+
+function appendNumber (number) {
+    if (number === "." && currentOperand.innerText.includes(".")) return;
+    if (number === "0" && currentOperand.innerText === "0") return;
+    if (currentOperand.innerText === "0" && number !== ".") return currentOperand.innerText = number;
+    if (currentOperand.innerText === "" && number === ".") return currentOperand.innerText = "0.";
+    currentOperand.innerText = currentOperand.innerText + number;
 }
 
 function divisionByZero () {
@@ -71,8 +76,6 @@ function equalButtonPressed () {
 }
 
 function operationButtonPressed (keyPressed) {
-    if (keyPressed === "-" && currentOperand.innerText === "") return currentOperand.innerText = "-";
-    if (currentOperand.innerText === "-" && keyPressed === "-") return currentOperand.innerText = "";
     if (currentOperand.innerText === "" && previousOperand.innerText === "") return;
     if (operation !== "") {
         if (currentOperand.innerText === "") {
@@ -94,46 +97,95 @@ function operationButtonPressed (keyPressed) {
 //keyboard
 document.addEventListener('keydown', (event) => {
     switch (event.code) {
-        case "Numpad0" || "Digit0":
+        case "Numpad0":
             appendNumber("0");
             break;
-        case "Numpad1" || "Digit1":
+        case "Digit0":
+            appendNumber("0");
+            break;
+        case "Numpad1":
             appendNumber("1");
             break;
-        case "Numpad2" || "Digit2":
+        case "Digit1":
+            appendNumber("1");
+            break;
+        case "Numpad2":
             appendNumber("2");
             break;
-        case "Numpad3" || "Digit3":
+        case "Digit2":
+            appendNumber("2");
+            break;
+        case "Numpad3":
             appendNumber("3");
             break;
-        case "Numpad4" || "Digit4":
+        case "Digit3":
+            appendNumber("3");
+            break;
+        case "Numpad4":
             appendNumber("4");
             break;
-        case "Numpad5" || "Digit5":
+        case "Digit4":
+            appendNumber("4");
+            break;
+        case "Numpad5":
             appendNumber("5");
             break;
-        case "Numpad6" || "Digit6":
+        case "Digit5":
+            if(event.shiftKey) {
+                percentage();
+                break;
+            }
+            appendNumber("5");
+            break;
+        case "Numpad6":
             appendNumber("6");
             break;
-        case "Numpad7" || "Digit7":
+        case "Digit6":
+            appendNumber("6");
+            break;
+        case "Numpad7":
             appendNumber("7");
             break;
-        case "Numpad8" || "Digit8":
+        case "Digit7":
+            appendNumber("7");
+            break;
+        case "Numpad8":
             appendNumber("8");
             break;
-        case "Numpad9" || "Digit9":
+        case "Digit8":
+            if(event.shiftKey) {
+                operationButtonPressed("*");
+                break;
+            }
+            appendNumber("8");
+            break;
+        case "Numpad9":
             appendNumber("9");
             break;
-        case "NumpadDecimal" || "Period":
+        case "Digit9":
+            appendNumber("9");
+            break;
+        case "NumpadDecimal":
+            appendNumber(".");
+            break;
+        case "Period":
             appendNumber(".");
             break;
         case "NumpadDivide":
             operationButtonPressed("/");
             break;
+        case "IntlRo":
+            if (event.shiftKey) {
+                operationButtonPressed("/");
+            }
+            break;
         case "NumpadMultiply":
             operationButtonPressed("*");
             break;
         case "NumpadSubtract":
+            operationButtonPressed("-");
+            break;
+        case "Minus":
             operationButtonPressed("-");
             break;
         case "NumpadAdd":
@@ -142,7 +194,21 @@ document.addEventListener('keydown', (event) => {
         case "Backspace":
             currentOperand.innerText = currentOperand.innerText.slice(0,-1);
             break;
+        case "Delete":
+            allClear();
         case "NumpadEnter":
+            event.preventDefault();
+            equalButtonPressed();
+            break;
+        case "Enter":
+            event.preventDefault();
+            equalButtonPressed();
+            break;
+        case "Equal":
+            if (event.shiftKey) {
+                operationButtonPressed("+");
+                break;
+            }
             equalButtonPressed();
             break;
         default:
