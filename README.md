@@ -7,6 +7,7 @@
 - [Gustavo Henrique Spigoloni Vilaca](https://github.com/gustavospigoloni)
 - [Lucas Coutinho de Assis](https://github.com/lcassis10)
 
+
 ## Project
 
 We were tasked with creating a calculator using javascript. This calculator has support for keyboard inputs!
