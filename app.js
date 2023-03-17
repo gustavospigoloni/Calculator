@@ -175,9 +175,7 @@ document.addEventListener('keydown', (event) => {
             operationButtonPressed("/");
             break;
         case "IntlRo":
-            if (event.shiftKey) {
-                operationButtonPressed("/");
-            }
+            operationButtonPressed("/");
             break;
         case "NumpadMultiply":
             operationButtonPressed("*");
