@@ -169,7 +169,6 @@ document.addEventListener('keydown', (event) => {
         case "Digit5":
             if(event.shiftKey) {
                 percentage();
-                break;
             }
             break;
         case "Digit8":
